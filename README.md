@@ -1,2 +1,2 @@
-# Creating a To-do app with Create React App
+# Creating a Recipe app with Create React App
 
