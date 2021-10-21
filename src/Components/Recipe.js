@@ -1,13 +1,14 @@
-import React from 'react'
+import React from "react";
 
-const Recipe = ({ title, time, source,  key }) => {
+const Recipe = ({ title, img, source, nutrients }) => {
   return (
     <div className="recipe">
+      <img src={img} alt={title} />
       <h3>{title}</h3>
-      <p>Ready in {time}mins</p>
+      <p>{nutrients}</p>
       <a href="{source}">Source</a>
     </div>
   );
 };
 
-export default Recipe
+export default Recipe;

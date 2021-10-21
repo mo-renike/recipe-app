@@ -12,30 +12,28 @@ const App = () => {
 
   const getRecipes = async () => {
     const response = await fetch(
-      "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/mealplans/generate?timeFrame=day&targetCalories=2000&diet=vegetarian&exclude=shellfish%2C%20olives",
+      "https://edamam-food-and-grocery-database.p.rapidapi.com/parser?ingr=apple",
       {
         method: "GET",
         headers: {
-          "x-rapidapi-host":
-            "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
+          "x-rapidapi-host": "edamam-food-and-grocery-database.p.rapidapi.com",
           "x-rapidapi-key":
             "b5955c940amsh9ba067ff07dbc5ap17f2abjsn2acd75e2d6af",
         },
       }
     );
     const data = await response.json();
-    setRecipes(data.meals);
-    console.log(data.meals);
+    console.log(data.hints);
+    setRecipes(data.hints);
   };
   const updateSearch = (e) => {
     setSearch(e.target.value);
-    console.log(search);
   };
 
   const getSearch = (e) => {
     e.preventDefault();
     setQuery(search);
-    setSearch('')
+    setSearch("");
   };
   return (
     <div className="container">
@@ -54,10 +52,11 @@ const App = () => {
       <div className="recipes">
         {recipes.map((recipe) => (
           <Recipe
-            key={recipe.id}
-            title={recipe.title}
-            time={recipe.readyInMinutes}
-            source={recipe.sourceUrl}
+            key={recipe.foodId}
+            title={recipe.label}
+            img={recipe.image}
+            source={recipe.uri}
+            nutrients={recipe.nutrients}
           />
         ))}
       </div>
@@ -66,3 +65,5 @@ const App = () => {
 };
 
 export default App;
+
+//get api from edeman.com
