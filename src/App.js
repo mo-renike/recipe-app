@@ -11,20 +11,15 @@ const App = () => {
   }, [query]);
 
   const getRecipes = async () => {
-    const response = await fetch(
-      "https://edamam-food-and-grocery-database.p.rapidapi.com/parser?ingr=apple",
-      {
-        method: "GET",
-        headers: {
-          "x-rapidapi-host": "edamam-food-and-grocery-database.p.rapidapi.com",
-          "x-rapidapi-key":
-            "b5955c940amsh9ba067ff07dbc5ap17f2abjsn2acd75e2d6af",
-        },
-      }
-    );
+    const response = await fetch(`https://themealdb.p.rapidapi.com/filter.php?i=${query}`, {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "themealdb.p.rapidapi.com",
+		"x-rapidapi-key": "b5955c940amsh9ba067ff07dbc5ap17f2abjsn2acd75e2d6af"
+	}
+})
     const data = await response.json();
-    console.log(data.hints);
-    setRecipes(data.hints);
+    setRecipes(data.meals);
   };
   const updateSearch = (e) => {
     setSearch(e.target.value);
@@ -40,6 +35,7 @@ const App = () => {
       <h1>Recipe App</h1>
       <form onSubmit={getSearch} className="search-form">
         <input
+        placeholder="Enter Recipe"
           type="search"
           className="search-bar"
           value={search}
@@ -50,15 +46,13 @@ const App = () => {
         </button>
       </form>
       <div className="recipes">
-        {recipes.map((recipe) => (
+        {recipes.map((recipe) =>
           <Recipe
-            key={recipe.foodId}
-            title={recipe.label}
-            img={recipe.image}
-            source={recipe.uri}
-            nutrients={recipe.nutrients}
+            key={recipe.idMeal}
+            title={recipe.strMeal}
+            img={recipe.strMealThumb}
           />
-        ))}
+        )}
       </div>
     </div>
   );
@@ -67,3 +61,4 @@ const App = () => {
 export default App;
 
 //get api from edeman.com
+ 
