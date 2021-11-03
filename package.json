@@ -1,5 +1,5 @@
-{
-  "name": "product-details",
+{"homepage": "https://mo-recipe-app.netlify.app",
+  "name": "recipe-app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
